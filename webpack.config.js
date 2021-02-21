@@ -5,7 +5,7 @@ const __dirname = path.resolve();
 export default {
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
     filename: "bundle.js"
   },
   devtool: "source-map",
