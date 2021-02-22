@@ -40,7 +40,7 @@ class Icon extends LitElement {
 
 customElements.define('my-icon', Icon);
 
-// generat HEX-colors to css filter property
+// generat basic-colors to css filter property
 function calculateColorValue(color) {
   switch (color) {
     case "white": return 'invert(95%) sepia(24%) saturate(7446%) hue-rotate(183deg) brightness(132%) contrast(93%)'
