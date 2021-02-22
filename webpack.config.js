@@ -1,4 +1,4 @@
-import HtmlWebpackPlugin from "html-webpack-plugin"
+import HtmlWebpackPlugin from "html-webpack-plugin";
 import path from "path";
 const __dirname = path.resolve();
 
@@ -19,11 +19,22 @@ export default {
         },
       },
       {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.png$/, 
+        test: /\.png$/,
         loader: 'file-loader'
       }
     ]

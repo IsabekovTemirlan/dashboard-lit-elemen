@@ -1,32 +1,34 @@
 import "./components/Icon.js";
 import "./components/MenuItem.js";
 import "./style.css";
-import {items} from "./data.js";
+import { items } from "./data.js";
 
-let visible = true;
-const sidebar = document.querySelector('.sidebar');
-const toggleBtn = document.querySelector('#toggler');
+let visible = true, sidebar = $('.sidebar'), toggleBtn = $('#toggler');
 
-document.onclick = ({target}) => {
-  const { classList } = sidebar;
-  if (target === toggleBtn) {
-    visible = !visible;
-  
-    if (!visible) {
-      classList.remove('in');
-      classList.add('out');
-    } else {
-      classList.remove('out');
-      classList.add('in');
-    }
-  } else {
-    if (visible && (window.innerWidth < 770)) {
-      visible = !visible;
-      classList.remove('in');
-      classList.add('out');
-    }
+document.onclick = ({ target }) => sidebarToggler(sidebar, target, toggleBtn, visible);// sidebar toggle handler
+sidebar.insertAdjacentHTML('afterbegin', items.map(renderMenuItems).join('')); // render <menu-item> inside sidebar
+
+// mini helper
+export function $(selector) {
+  return document.querySelector(selector);
+}
+
+// toggle sidebar 
+function sidebarToggler({ classList }, target, btn, vsbl) {
+  if (target === btn) {
+    vsbl = !vsbl;
+    classList.toggle('in');
+    classList.toggle('out');
+  }
+  // for small screen devices
+  if (vsbl && (window.innerWidth < 770)) {
+    vsbl = !vsbl;
+    classList.toggle('in');
+    classList.toggle('out');
   }
 }
 
-const renderMenuItems = ({title, icon, url}) => `<menu-item title="${title}" icon="${icon}" url="${url}"></menu-item>`;
-sidebar.insertAdjacentHTML('afterbegin', items.map(renderMenuItems).join(''))
+// generate custom <menu-item> web components
+function renderMenuItems({ title, icon, url, imgurl }) {
+  return `<menu-item title="${title}" icon="${icon}" url="${url}" imgurl="${imgurl}"></menu-item>`;
+}

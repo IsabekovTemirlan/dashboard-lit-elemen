@@ -1,11 +1,13 @@
 import { LitElement, html, css } from 'lit-element';
+import { $ } from "../index.js";
 
 class MenuItem extends LitElement {
   static get properties() {
     return {
-      title: {type: String},
-      icon: {type: String},
-      url: {type: String}
+      title: { type: String },
+      icon: { type: String },
+      url: { type: String },
+      imgurl: { type: String }
     }
   }
 
@@ -14,16 +16,16 @@ class MenuItem extends LitElement {
     this.title = '';
     this.icon = '';
     this.url = '';
+    this.imgurl = '';
 
-    this.content = document.querySelector('.content');
+    this.content = $('.content');
     this.onclick = (e) => this.content.innerHTML = `<h1>${e.target.title}</h1><iframe src="${this.url}"></iframe>`;
   }
-
 
   render() {
     return html`
       <div class="item">
-        ${this.icon ? html`<my-icon name="${this.icon}"></my-icon>` : html`<div style="widht:30px; height:30px"></div>`}
+        ${this.icon ? html`<my-icon name="${this.icon}" color="blue" imgurl="${this.imgurl}"></my-icon>` : html`<div style="widht:30px; height:30px"></div>`}
         ${this.title}
       </div>`
   }
